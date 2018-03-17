@@ -36,7 +36,8 @@ namespace PostFormatter
                 header += "categories:\n";
                 foreach (String cat in categories)
                 {
-                    header += $"-{cat}\n";
+                    if (cat.Length != 0)
+                        header += $"- {cat}\n";
                 }
             }
             header += "---\n";
@@ -49,7 +50,8 @@ namespace PostFormatter
             String outputFileName = $"{DateTime.Now:yyyy-MM-dd}";
             foreach (String word in urlTitle)
             {
-                outputFileName += $"-{word}";
+                if (word.Length != 0)
+                    outputFileName += $"-{word}";
             }
             outputFileName = $"{fileName.Substring(0, fileName.LastIndexOf('\\') + 1)}{outputFileName}.md";
             File.WriteAllText(outputFileName, $"{header}\n{file}");
